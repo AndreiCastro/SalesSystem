@@ -49,7 +49,8 @@
     <td>ORM</td>
     <td>Front-end</td>
     <td>Bootstrap</td>
-    <td>API</td>    
+    <td>API</td>
+    <td>Ferramenta para Requisições</td>
   </tr>
   <tr>
     <td>Visual Studio 2022</td>
@@ -60,6 +61,7 @@
     <td>Razor e JavaScript</td>
     <td>v4.3.1</td>
     <td>Rest</td>
+    <td>PostMan 10.18.6</td>
   </tr>
 </table>
  
