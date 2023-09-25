@@ -1,0 +1,4 @@
+IF NOT EXISTS(SELECT * FROM sys.databases WHERE NAME = 'SalesSystem')
+BEGIN
+	CREATE DATABASE SalesSystem	
+END
