@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using System.Collections.Generic;
 
 namespace SalesSystem.WebApi.Model
 {
@@ -13,15 +14,15 @@ namespace SalesSystem.WebApi.Model
         [Required]
         public DateTime DataVenda { get; set; }
         
-        [Required(ErrorMessage = "Quantidade é obrigatória.")]
-        [DisplayName("Quantidade")]
+        [Required(ErrorMessage = "Quantidade do Produto é obrigatório.")]
+        [DisplayName("Quantidade de Produto")]
         public int QuantidadeProduto { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Valor Total é obrigatório.")]
         public decimal ValorTotal { get; set; }
                 
         [DisplayName("Descrição")]
-        [StringLength(100, ErrorMessage = "{0} deve conter {1} caracteres.")]
+        [StringLength(100, ErrorMessage = "Descrição não pode ultrapassar {1} caracteres.")]
         public string Descricao { get; set; }
 
         public decimal? Desconto { get; set; }

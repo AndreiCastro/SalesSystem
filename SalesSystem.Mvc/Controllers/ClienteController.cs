@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SalesSystem.Mvc.Enums;
 using SalesSystem.Mvc.Helpers;
 using SalesSystem.WebApi.Model;
 using System;
@@ -90,6 +89,7 @@ namespace SalesSystem.Mvc.Controllers
 
                     if (response.IsSuccessStatusCode)
                     {
+                        TempData["MensagemSucesso"] = "Cliente cadastrado com sucesso!";
                         return RedirectToAction("Index");
                     }
                     else
@@ -110,7 +110,7 @@ namespace SalesSystem.Mvc.Controllers
 
         #region Update
         /// <summary>
-        /// Método que retorna com a view Update
+        /// Método que retorna com a view Update com o cliente
         /// </summary>
         /// <param name="idCliente"></param>        
         public async Task<IActionResult> Update(int idCliente)
@@ -162,6 +162,7 @@ namespace SalesSystem.Mvc.Controllers
 
                     if (response.IsSuccessStatusCode)
                     {
+                        TempData["MensagemSucesso"] = "Cliente alterado com sucesso!";
                         return RedirectToAction("Index");
                     }
                     else
@@ -225,6 +226,7 @@ namespace SalesSystem.Mvc.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    TempData["MensagemSucesso"] = "Cliente excluído com sucesso!";
                     return RedirectToAction("Index");
                 }
                 else

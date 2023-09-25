@@ -32,13 +32,13 @@
                     <span asp-validation-for="Preco" class="text-danger"></span>
                 </div>
 
-                <div class="col-2">
+                <div class="col-3">
                     <label for="text" class="col-form-label">@Html.DisplayNameFor(m => m.UnidadeMedida)</label>
                     <select class="form-control" asp-for="UnidadeMedida" asp-items="@Html.GetEnumSelectList(typeof(SalesSystem.Mvc.Enums.Enumeradores.UnidadeMedida))"></select>
                     <span asp-validation-for="UnidadeMedida" class="text-danger"></span>
                 </div>
 
-                <div class="col-5">
+                <div class="col-4">
                     <label for="text" class="col-form-label">Quantidade</label>
                     <input type="text" inputmode="numeric" class="form-control" asp-for="Quantidade" placeholder="Insira Quantidade" />
                     <span asp-validation-for="Quantidade" class="text-danger"></span>

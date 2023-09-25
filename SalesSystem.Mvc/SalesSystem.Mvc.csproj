@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Venda\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SalesSystem.WebApi\SalesSystem.WebApi.csproj" />
   </ItemGroup>
 

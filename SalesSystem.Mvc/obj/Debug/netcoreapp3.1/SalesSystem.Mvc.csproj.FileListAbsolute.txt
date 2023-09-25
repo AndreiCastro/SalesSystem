@@ -130,9 +130,16 @@ C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\ne
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Index.cshtml.g.cs
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Update.cshtml.g.cs
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Home\Menu.cshtml.g.cs
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Produto\Create.cshtml.g.cs
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Produto\Delete.cshtml.g.cs
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Produto\Index.cshtml.g.cs
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Produto\Update.cshtml.g.cs
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Venda\Create.cshtml.g.cs
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Venda\Delete.cshtml.g.cs
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Venda\Index.cshtml.g.cs
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\SalesSystem.Mvc.RazorTargetAssemblyInfo.cache
@@ -142,7 +149,3 @@ C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\ne
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\SalesSystem.Mvc.dll
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\SalesSystem.Mvc.pdb
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\SalesSystem.Mvc.genruntimeconfig.cache
-C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Produto\Index.cshtml.g.cs
-C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Produto\Create.cshtml.g.cs
-C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Produto\Delete.cshtml.g.cs
-C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\netcoreapp3.1\Razor\Views\Produto\Update.cshtml.g.cs

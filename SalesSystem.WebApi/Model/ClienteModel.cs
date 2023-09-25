@@ -37,7 +37,7 @@ namespace SalesSystem.WebApi.Model
         public string Uf { get; set; }
 
         [Required(ErrorMessage = "CEP é obrigatório.")]
-        [StringLength(10, ErrorMessage = "CEP deve conter {1} caracteres.")]
+        [StringLength(10, ErrorMessage = "CEP não pode ultrapassar {1} caracteres.")]
         public string Cep { get; set; }
 
         [Required(ErrorMessage = "{0} é obrigatório.")]

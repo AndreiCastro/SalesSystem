@@ -18,12 +18,19 @@ namespace SalesSystem.WebApi.Repository
 
         public async Task<List<VendaModel>> GetAllVendas()
         {
-            return await _context.Vendas.AsNoTracking().OrderBy(x => x.Id).ToListAsync();
+            return await _context.Vendas.AsNoTracking()
+                .Include(c => c.Cliente)
+                .Include(p => p.Produto)
+                .OrderBy(x => x.Id)
+                .ToListAsync();
         }
 
         public async Task<VendaModel> GetVenda(int id)
         {
-            return await _context.Vendas.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Vendas.AsNoTracking()
+                .Include(c => c.Cliente)
+                .Include(p => p.Produto)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
 

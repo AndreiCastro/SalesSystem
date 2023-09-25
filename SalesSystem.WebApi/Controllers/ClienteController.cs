@@ -134,7 +134,6 @@ namespace SalesSystem.WebApi.Controllers
                         return Ok();
                     else
                         return NotFound("Cliente não foi deletado, erro ao deletar no banco de dados.");
-
                 }
                 else
                 {

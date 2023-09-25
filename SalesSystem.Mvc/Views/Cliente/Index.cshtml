@@ -3,66 +3,76 @@
 @{
     ViewData["Title"] = "Clientes";
 }
+<meta charset="utf-8" />
+
 <div class="cotainer">
     <div class="row justify-content-center">
         <div>
-
-            <div class="d-grid gap-2 d-md-flex justify-context-md-start">
-                <a class="btn btn-primary" role="button" asp-controller="Cliente" asp-action="Create">Adicionar novo cliente</a>
-            </div>
-            <br />
-
             <div class="text-center">
+
+                <div class="d-grid gap-2 d-md-flex justify-context-md-start">
+                    <a class="btn btn-primary" role="button" asp-controller="Cliente" asp-action="Create">Adicionar novo cliente</a>
+                </div>
+                <br />
+                <br />
+
+                @if (TempData["MensagemSucesso"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+                        @TempData["MensagemSucesso"]
+                    </div>
+                }
+
                 <h4 class="display-4">Lista de Clientes</h4>
-            </div>
 
-            <table class="table text-center">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">E-mail</th>
-                        <th scope="col">CPF/CNPJ</th>
-                        <th scope="col">Logradouro</th>
-                        <th scope="col">Bairro</th>
-                        <th scope="col">UF</th>
-                        <th scope="col">CEP</th>
-                        <th scope="col">Cidade</th>
-                        <th scope="col">Telefone</th>
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">CPF/CNPJ</th>
+                            <th scope="col">Logradouro</th>
+                            <th scope="col">Bairro</th>
+                            <th scope="col">UF</th>
+                            <th scope="col">CEP</th>
+                            <th scope="col">Cidade</th>
+                            <th scope="col">Telefone</th>
 
-                    </tr>
-                </thead>
-                <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    @if (Model != null && Model.Any())
-                    {
-                        foreach (var cliente in Model)
+                        @if (Model != null && Model.Any())
                         {
-                            <tr>
-                                <th scope="row">@cliente.Id</th>
-                                <td>@cliente.Nome</td>
-                                <td>@cliente.Email</td>
-                                <td>@cliente.CpfCnpj</td>
-                                <td>@cliente.Logradouro</td>
-                                <td>@cliente.Bairro</td>
-                                <td>@cliente.Uf</td>
-                                <td>@cliente.Cep</td>
-                                <td>@cliente.Cidade</td>
-                                <td>@cliente.Telefone</td>
+                            foreach (var cliente in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@cliente.Id</th>
+                                    <td>@cliente.Nome</td>
+                                    <td>@cliente.Email</td>
+                                    <td>@cliente.CpfCnpj</td>
+                                    <td>@cliente.Logradouro</td>
+                                    <td>@cliente.Bairro</td>
+                                    <td>@cliente.Uf</td>
+                                    <td>@cliente.Cep</td>
+                                    <td>@cliente.Cidade</td>
+                                    <td>@cliente.Telefone</td>
 
-                                <td>
-                                    <div class="btn-group" role="group">
-                                        <a class="btn btn-primary" role="button" asp-controller="Cliente" asp-action="Update" asp-route-idCliente="@cliente.Id">Editar</a>
-                                        <a class="btn btn-danger" role="button" asp-controller="Cliente" asp-action="Delete" asp-route-id="@cliente.Id">Excluir</a>
-                                    </div>
-                                </td>                                
-                            </tr>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a class="btn btn-primary" role="button" asp-controller="Cliente" asp-action="Update" asp-route-idCliente="@cliente.Id">Editar</a>
+                                            <a class="btn btn-danger" role="button" asp-controller="Cliente" asp-action="Delete" asp-route-id="@cliente.Id">Excluir</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
                         }
-                    }
-                    
-                </tbody>
-            </table>
 
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

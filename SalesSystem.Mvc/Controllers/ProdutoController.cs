@@ -21,7 +21,6 @@ namespace SalesSystem.Mvc.Controllers
         {
             _clientFactory = httpClientFactory;
         }
-
         #endregion Construtor
 
         /// <summary>
@@ -83,12 +82,13 @@ namespace SalesSystem.Mvc.Controllers
                 {
                     produto.UnidadeMedida = Helper.RetornaDescricaoEnum(Convert.ToInt32(produto.UnidadeMedida), "UM");
                     var client = _clientFactory.CreateClient("HttpClient");
-                    var jsonCliente = JsonConvert.SerializeObject(produto);
-                    StringContent content = new StringContent(jsonCliente, Encoding.UTF8, "application/json");
+                    var jsonProduto = JsonConvert.SerializeObject(produto);
+                    StringContent content = new StringContent(jsonProduto, Encoding.UTF8, "application/json");
                     HttpResponseMessage response = await client.PostAsync("/api/produto/Post", content);
 
                     if (response.IsSuccessStatusCode)
                     {
+                        TempData["MensagemSucesso"] = "Produto cadastrado com sucesso!";
                         return RedirectToAction("Index");
                     }
                     else
@@ -109,7 +109,7 @@ namespace SalesSystem.Mvc.Controllers
 
         #region Update
         /// <summary>
-        /// Método que retorna com a view Update
+        /// Método que retorna com a view Update com o produto
         /// </summary>
         /// <param name="idProduto"></param>
         public async Task<IActionResult> Update(int idProduto)
@@ -155,12 +155,13 @@ namespace SalesSystem.Mvc.Controllers
                         produto.UnidadeMedida = Helper.RetornaDescricaoEnum(Convert.ToInt32(produto.UnidadeMedida), "UM");
 
                     var client = _clientFactory.CreateClient("HttpClient");
-                    var jsonCliente = JsonConvert.SerializeObject(produto);
-                    StringContent content = new StringContent(jsonCliente, Encoding.UTF8, "application/json");
+                    var jsonProduto = JsonConvert.SerializeObject(produto);
+                    StringContent content = new StringContent(jsonProduto, Encoding.UTF8, "application/json");
                     HttpResponseMessage response = await client.PutAsync("/api/produto/Put/" + produto.Id, content);
 
                     if (response.IsSuccessStatusCode)
                     {
+                        TempData["MensagemSucesso"] = "Produto alterado com sucesso!";
                         return RedirectToAction("Index");
                     }
                     else
@@ -225,6 +226,7 @@ namespace SalesSystem.Mvc.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    TempData["MensagemSucesso"] = "Produto excluído com sucesso!";
                     return RedirectToAction("Index");
                 }
                 else

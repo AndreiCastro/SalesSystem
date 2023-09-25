@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using SalesSystem.Mvc.Enums;
-using System;
-using System.ComponentModel.Design;
+﻿using System;
 using static SalesSystem.Mvc.Enums.Enumeradores;
 
 namespace SalesSystem.Mvc.Helpers
