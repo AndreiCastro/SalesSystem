@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+}
+<br />
+<div class="row" style="font-family:Arial; font-size:medium; color:#242424">
+    <div class="col-lg-4" style="text-align:center">
+        <div>
+            <a asp-controller="Cliente" asp-action="Index"><img src="~/images/clientes.png" width="150" height="150" style="text-align:center" /></a>
+        </div>
+        <span>Cadastro de Clientes</span>
+    </div>
+
+    <div class="col-lg-4" style="text-align:center">
+        <div>
+            <a asp-controller="Produto" asp-action="Index"><img src="~/images/produtos.png" width="150" height="150" /></a>
+        </div>
+        <span>Cadastro de Produtos</span>
+    </div>
+
+    <div class="col-lg-4" style="text-align:center">
+        <div>
+            <a asp-controller="Venda" asp-action="Index"><img src="~/images/vendas.png" width="150" height="150" /></a>
+        </div>
+        <span>Registro de Vendas</span>
+    </div>
+</div>

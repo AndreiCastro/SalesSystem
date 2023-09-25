@@ -1,0 +1,30 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+<meta charset="utf-8" />
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="text-center">
+                <h3 class="display-3">Erro</h3>
+            </div>
+            <br />
+
+            <div class="text-left">
+                <h2 class="text-danger">Ocorreu um erro enquanto sua requisição foi processada.</h2>
+                <br />
+                <br />
+
+                <h3>Erro: @ViewBag.Erro</h3>
+                <br />
+                <br />
+
+                <p><b>Contate o Administrador do Sistema</b></p>
+            </div>
+
+        </div>
+    </div>
+</div>

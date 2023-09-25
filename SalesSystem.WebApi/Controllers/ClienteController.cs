@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesSystem.WebApi.Model;
 using SalesSystem.WebApi.Repository;
+using System;
 using System.Threading.Tasks;
 
 namespace SalesSystem.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]    
+    [Route("api/[controller]/[action]")]    
     public class ClienteController : ControllerBase
     {
         private readonly IClienteRepository _repository;
@@ -25,7 +26,19 @@ namespace SalesSystem.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _repository.GetAllClientes());
+            try
+            {
+                var clientes = await _repository.GetAllClientes();
+                if (clientes == null)
+                    return NotFound("Clientes não encontrados");
+                else
+                    return Ok(await _repository.GetAllClientes());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         /// <summary>
@@ -35,11 +48,18 @@ namespace SalesSystem.WebApi.Controllers
         [HttpGet("{idCliente:int}")]
         public async Task<IActionResult> Get(int idCliente)
         {
-            var cliente = await _repository.GetCliente(idCliente);
-            if (cliente == null)
-                return BadRequest();
-
-            return Ok(cliente);
+            try
+            {
+                var cliente = await _repository.GetCliente(idCliente);
+                if (cliente == null)
+                    return NotFound("Cliente não encontrado");
+                else
+                    return Ok(cliente);                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         #endregion Get
 
@@ -50,11 +70,18 @@ namespace SalesSystem.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(ClienteModel cliente)
         {
-            _repository.Add(cliente);
-            if (await _repository.SaveChanges())
-                return Ok(cliente);
-
-            return BadRequest();
+            try
+            {
+                _repository.Add(cliente);
+                if (await _repository.SaveChanges())
+                    return Ok(cliente);
+                else
+                    return NotFound("Cliente não cadastrado, erro ao inserir no banco de dados.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }            
         }
         #endregion Post
 
@@ -66,14 +93,26 @@ namespace SalesSystem.WebApi.Controllers
         [HttpPut("{idCliente:int}")]
         public async Task<IActionResult> Put(int idCliente, ClienteModel cliente)
         {
-            var clienteDB = await _repository.GetCliente(idCliente);
-            if (clienteDB != null)
+            try
             {
-                _repository.Update(cliente);
-                if (await _repository.SaveChanges()) 
-                    return Ok(cliente);
+                var clienteDB = await _repository.GetCliente(idCliente);
+                if (clienteDB != null)
+                {
+                    _repository.Update(cliente);
+                    if (await _repository.SaveChanges())
+                        return Ok(cliente);
+                    else
+                        return NotFound("Cliente não foi alterado, erro ao alterar no banco de dados.");
+                }
+                else
+                {
+                    return NotFound("Cliente não encontrado.");
+                }
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
         #endregion Put
 
@@ -85,15 +124,27 @@ namespace SalesSystem.WebApi.Controllers
         [HttpDelete("{idCliente:int}")]
         public async Task<IActionResult> Delete(int idCliente)
         {
-            var cliente = await _repository.GetCliente(idCliente);
-            if (cliente != null)
+            try
             {
-                _repository.Delete(cliente);
-                if (await _repository.SaveChanges())
-                    return Ok();
+                var cliente = await _repository.GetCliente(idCliente);
+                if (cliente != null)
+                {
+                    _repository.Delete(cliente);
+                    if (await _repository.SaveChanges())
+                        return Ok();
+                    else
+                        return NotFound("Cliente não foi deletado, erro ao deletar no banco de dados.");
 
+                }
+                else
+                {
+                    return NotFound("Cliente não encontrado.");
+                }
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
         #endregion Delete        
     }

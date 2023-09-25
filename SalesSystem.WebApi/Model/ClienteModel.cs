@@ -32,12 +32,12 @@ namespace SalesSystem.WebApi.Model
         [StringLength(20, MinimumLength = 3, ErrorMessage = "{0} deve conter de {2} a {1} caracteres.")]
         public string Bairro { get; set; }
 
-        [Required(ErrorMessage = "{0} é obrigatório.")]
+        [Required(ErrorMessage = "UF é obrigatório.")]
         [StringLength(2, ErrorMessage = "{0} deve conter {1} caracteres.")]
         public string Uf { get; set; }
 
-        [Required(ErrorMessage = "{0} é obrigatório.")]
-        [StringLength(10, ErrorMessage = "{0} deve conter {1} caracteres.")]
+        [Required(ErrorMessage = "CEP é obrigatório.")]
+        [StringLength(10, ErrorMessage = "CEP deve conter {1} caracteres.")]
         public string Cep { get; set; }
 
         [Required(ErrorMessage = "{0} é obrigatório.")]

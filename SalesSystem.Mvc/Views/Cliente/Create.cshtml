@@ -1,0 +1,91 @@
+﻿@model SalesSystem.WebApi.Model.ClienteModel
+
+@{
+    ViewData["Title"] = "Cadastro Cliente";
+}
+<meta charset="utf-8" />
+
+<div class="cotainer">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="text-center">
+                <h1 class="display-4">Cadastrar Cliente</h1>
+            </div>
+
+            <form class="row g-3" asp-controller="Cliente" asp-action="Create" method="Post">
+                <div class="col-12">
+                    <label for="text" class="col-form-label">Nome</label>
+                    <input type="text" class="form-control" asp-for="Nome" placeholder="Insira Nome" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label for="email_address" class="col-form-label">@Html.DisplayNameFor(m => m.Email)</label>
+                    <input type="email" class="form-control" asp-for="Email" placeholder="Insira e-mail" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label for="email_address" class="col-form-label">Confirma E-mail</label>
+                    <input type="email" class="form-control" asp-for="ComparaEmail" placeholder="Insira o mesmo e-mail" />
+                    <span asp-validation-for="ComparaEmail" class="text-danger"></span>
+                </div>
+
+                <div class="col-6">
+                    <label for="number" class="col-form-label">@Html.DisplayNameFor(m => m.CpfCnpj)</label>
+                    <input type="text" inputmode="numeric" class="form-control" asp-for="CpfCnpj" placeholder="Insira somente números" />
+                    <span asp-validation-for="CpfCnpj" class="text-danger"></span>
+                </div>
+
+                <div class="col-6">
+                    <label for="text" class="col-form-label">Logradouro</label>
+                    <input type="text" class="form-control" asp-for="Logradouro" placeholder="Insira Logradouro" />
+                    <span asp-validation-for="Logradouro" class="text-danger"></span>
+                </div>
+
+                <div class="col-6">
+                    <label for="text" class="col-form-label">Bairro</label>
+                    <input type="text" class="form-control" asp-for="Bairro" placeholder="Insira Bairro" />
+                    <span asp-validation-for="Bairro" class="text-danger"></span>
+                </div>
+
+                <div class="col-2">
+                    <label for="text" class="col-form-label">UF</label>
+                    <select class="form-control" asp-for="Uf" asp-items="@Html.GetEnumSelectList(typeof(SalesSystem.Mvc.Enums.Enumeradores.UnidadeFederativa))"></select>
+                    <span asp-validation-for="Uf" class="text-danger"></span>
+                </div>
+
+                <div class="col-4">
+                    <label for="text" class="col-form-label">CEP</label>
+                    <input type="text" class="form-control" asp-for="Cep" placeholder="Insira Bairro" />
+                    <span asp-validation-for="Cep" class="text-danger"></span>
+                </div>
+
+                <div class="col-6">
+                    <label for="text" class="col-form-label">Cidade</label>
+                    <input type="text" class="form-control" asp-for="Cidade" placeholder="Insira Cidade" />
+                    <span asp-validation-for="Cidade" class="text-danger"></span>
+                </div>
+
+                <div class="col-6">
+                    <label for="text" class="col-form-label">Telefone</label>
+                    <input type="text" inputmode="numeric" class="form-control" asp-for="Telefone" placeholder="Insira Telefone" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary" value="Create">Adicionar</button>
+                    <a class="btn btn-secondary" role="button" asp-controller="Cliente" asp-action="Index">Voltar</a>
+                </div>
+            </form>
+            <br />
+
+        </div>
+    </div>
+</div>
+

@@ -25,8 +25,8 @@ namespace SalesSystem.WebApi.Model
         public decimal Preco { get; set; }
 
         [Required(ErrorMessage = "Unidade de Medida é obrigatória.")]
-        [StringLength(3, MinimumLength = 2, ErrorMessage = "{0} deve conter {1}.")]
-        [DisplayName("Unidade Medida")]
+        [StringLength(3, MinimumLength = 1, ErrorMessage = "{0} deve conter {1}.")]
+        [DisplayName("Unid. Medida")]
         public string UnidadeMedida { get; set; }
 
         [Required(ErrorMessage = "{0} é obrigatória.")]

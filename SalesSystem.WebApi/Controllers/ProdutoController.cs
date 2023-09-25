@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesSystem.WebApi.Model;
 using SalesSystem.WebApi.Repository;
+using System;
 using System.Threading.Tasks;
 
 namespace SalesSystem.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]    
+    [Route("api/[controller]/[action]")]    
     public class ProdutoController : ControllerBase
     {
         private readonly IProdutoRepository _repository;
@@ -25,7 +26,18 @@ namespace SalesSystem.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _repository.GetAllProdutos());
+            try
+            {
+                var produtos = await _repository.GetAllProdutos();
+                if (produtos == null)
+                    return NotFound("Produtos não encontrados");
+                else
+                    return Ok(await _repository.GetAllProdutos());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -35,11 +47,18 @@ namespace SalesSystem.WebApi.Controllers
         [HttpGet("{idProduto:int}")]
         public async Task<IActionResult> Get(int idProduto)
         {
-            var produto = await _repository.GetProduto(idProduto);
-            if (produto == null)
-                return BadRequest();
-
-            return Ok(produto);
+            try
+            {
+                var produto = await _repository.GetProduto(idProduto);
+                if (produto == null)
+                    return NotFound("Produto não encontrado");
+                else
+                    return Ok(produto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         #endregion Get
 
@@ -50,11 +69,18 @@ namespace SalesSystem.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(ProdutoModel produto)
         {
-            _repository.Add(produto);
-            if (await _repository.SaveChanges())
-                return Ok(produto);
-
-            return BadRequest();
+            try
+            {
+                _repository.Add(produto);
+                if (await _repository.SaveChanges())
+                    return Ok(produto);
+                else
+                    return NotFound("Prduto não cadastrado, erro ao inserir no banco de dados.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
         #endregion Post
 
@@ -66,14 +92,26 @@ namespace SalesSystem.WebApi.Controllers
         [HttpPut("{idProduto:int}")]
         public async Task<IActionResult> Put(int idProduto, ProdutoModel produto)
         {
-            var produtoDB = await _repository.GetProduto(idProduto);
-            if (produtoDB != null)
+            try
             {
-                _repository.Update(produto);
-                if (await _repository.SaveChanges()) 
-                    return Ok(produto);
+                var produtoDB = await _repository.GetProduto(idProduto);
+                if (produtoDB != null)
+                {
+                    _repository.Update(produto);
+                    if (await _repository.SaveChanges())
+                        return Ok(produto);
+                    else
+                        return NotFound("Poduto não foi alterado, erro ao alterar no banco de dados.");
+                }
+                else
+                {
+                    return NotFound("Produto não encontrado.");
+                }
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
         #endregion Put
 
@@ -85,15 +123,26 @@ namespace SalesSystem.WebApi.Controllers
         [HttpDelete("{idProduto:int}")]
         public async Task<IActionResult> Delete(int idProduto)
         {
-            var produto = await _repository.GetProduto(idProduto);
-            if (produto != null)
+            try
             {
-                _repository.Delete(produto);
-                if (await _repository.SaveChanges())
-                    return Ok();
-
+                var produto = await _repository.GetProduto(idProduto);
+                if (produto != null)
+                {
+                    _repository.Delete(produto);
+                    if (await _repository.SaveChanges())
+                        return Ok();
+                    else
+                        return NotFound("Produto não foi deletado, erro ao deletar no banco de dados.");
+                }
+                else
+                {
+                    return NotFound("Produto não encontrado.");
+                }
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
         #endregion Delete        
     }

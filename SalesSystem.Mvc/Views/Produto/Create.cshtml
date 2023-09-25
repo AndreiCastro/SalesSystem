@@ -1,0 +1,73 @@
+﻿@model SalesSystem.WebApi.Model.ProdutoModel
+
+@{
+    ViewData["Title"] = "Cadastro Produto";
+}
+<meta charset="utf-8" />
+
+<div class="cotainer">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="text-center">
+                <h1 class="display-4">Cadastrar Produto</h1>
+            </div>
+
+            <form class="row g-3" asp-controller="Produto" asp-action="Create" method="Post">
+                <div class="col-12">
+                    <label for="text" class="col-form-label">Nome</label>
+                    <input type="text" class="form-control" asp-for="Nome" placeholder="Insira um Nome" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label for="text" class="col-form-label">@Html.DisplayNameFor(m => m.Descricao)</label>
+                    <input type="text" class="form-control" asp-for="Descricao" placeholder="Insira uma Descrição" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+
+                <div class="col-5">
+                    <label for="number" class="col-form-label">@Html.DisplayNameFor(m => m.Preco)</label>
+                    <input type="text" inputmode="numeric" class="form-control" asp-for="Preco" placeholder="Insira Preço" />
+                    <span asp-validation-for="Preco" class="text-danger"></span>
+                </div>
+
+                <div class="col-2">
+                    <label for="text" class="col-form-label">@Html.DisplayNameFor(m => m.UnidadeMedida)</label>
+                    <select class="form-control" asp-for="UnidadeMedida" asp-items="@Html.GetEnumSelectList(typeof(SalesSystem.Mvc.Enums.Enumeradores.UnidadeMedida))"></select>
+                    <span asp-validation-for="UnidadeMedida" class="text-danger"></span>
+                </div>
+
+                <div class="col-5">
+                    <label for="text" class="col-form-label">Quantidade</label>
+                    <input type="text" inputmode="numeric" class="form-control" asp-for="Quantidade" placeholder="Insira Quantidade" />
+                    <span asp-validation-for="Quantidade" class="text-danger"></span>
+                </div>
+
+                <div class="col-6">
+                    <label for="text" class="col-form-label">Peso</label>
+                    <input type="text" inputmode="numeric" class="form-control" asp-for="Peso" placeholder="Insira Peso" />
+                    <span asp-validation-for="Peso" class="text-danger"></span>
+                </div>     
+                
+                <div class="col-6">
+                    <label for="text" class="col-form-label">@Html.DisplayNameFor(m => m.DataValidade)</label>
+                    <input type="date" class="form-control" asp-for="DataValidade" />
+                    <span asp-validation-for="DataValidade" class="text-danger"></span>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary" value="Create">Adicionar</button>
+                    <a class="btn btn-secondary" role="button" asp-controller="Produto" asp-action="Index">Voltar</a>
+                </div>
+            </form>
+            <br />
+
+        </div>
+    </div>
+</div>
+
