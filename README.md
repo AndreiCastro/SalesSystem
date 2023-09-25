@@ -1,8 +1,10 @@
 <h1>Sales System - MVP</h1>
 
-### Status: Finalizado
+![Capturar](https://github.com/AndreiCastro/SalesSystem/assets/25482574/e33c1389-da4e-41a8-9e61-b42f97eeed8a)
 
-### Projeto de um sistema de vendas com CRUD para: Cliente - Produto - Venda
+### Projeto de um sistema de vendas com CRUD para: Cliente - Produto - Venda. Realizando a persistência e recuperação de dados via API Rest.
+
+### Status: Finalizado
 
 ### Cliente Model
 * Id
@@ -33,8 +35,11 @@
 * Valor Total
 * Descrição
 * Desconto
+  
+![Diagram_SalesSystem](https://github.com/AndreiCastro/SalesSystem/assets/25482574/48382f70-d4a0-4e83-ac13-a7ca9beb3b0a)
 
-## Tecnologia usadas:
+
+## Tecnologias usada:
 <table>
   <tr>
     <td>IDE</td>    
