@@ -36,7 +36,7 @@ namespace SalesSystem.WebApi.Repository
 
         public void Add(VendaModel venda)
         {
-            _context.Add(venda);
+            _context.AddAsync(venda);
         }
 
         public void Delete(VendaModel venda)

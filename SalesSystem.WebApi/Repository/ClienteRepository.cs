@@ -29,7 +29,7 @@ namespace SalesSystem.WebApi.Repository
 
         public void Add(ClienteModel cliente)
         {
-            _context.Add(cliente);
+            _context.AddAsync(cliente);
         }
 
         public void Delete(ClienteModel cliente)
