@@ -32,7 +32,7 @@ namespace SalesSystem.WebApi.Controllers
                 if (produtos == null)
                     return NotFound("Produtos não encontrados");
                 else
-                    return Ok(await _repository.GetAllProdutos());
+                    return Ok(produtos);
             }
             catch (Exception ex)
             {

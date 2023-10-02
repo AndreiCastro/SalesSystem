@@ -31,14 +31,13 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var clientes = new List<ClienteModel>();
                 var client = _clientFactory.CreateClient("HttpClient");
                 HttpResponseMessage response = await client.GetAsync("/api/cliente/Get");
 
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    clientes = JsonConvert.DeserializeObject<List<ClienteModel>>(data);
+                    var clientes = JsonConvert.DeserializeObject<List<ClienteModel>>(data);
                     return View(clientes);
                 }
                 else
@@ -117,14 +116,13 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var cliente = new ClienteModel();
                 var client = _clientFactory.CreateClient("HttpClient");
                 HttpResponseMessage response = await client.GetAsync("/api/cliente/Get/" + idCliente);
 
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    cliente = JsonConvert.DeserializeObject<ClienteModel>(data);
+                    var cliente = JsonConvert.DeserializeObject<ClienteModel>(data);
                     ViewBag.UF = cliente.Uf;
                     return View(cliente);
                 }
@@ -190,14 +188,13 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var cliente = new ClienteModel();
                 var client = _clientFactory.CreateClient("HttpClient");
                 HttpResponseMessage response = await client.GetAsync("/api/cliente/Get/" + id);
 
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    cliente = JsonConvert.DeserializeObject<ClienteModel>(data);
+                    var cliente = JsonConvert.DeserializeObject<ClienteModel>(data);
                     return View(cliente);
                 }
                 else

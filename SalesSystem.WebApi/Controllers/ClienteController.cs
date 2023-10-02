@@ -32,7 +32,7 @@ namespace SalesSystem.WebApi.Controllers
                 if (clientes == null)
                     return NotFound("Clientes não encontrados");
                 else
-                    return Ok(await _repository.GetAllClientes());
+                    return Ok(clientes);
             }
             catch (Exception ex)
             {
@@ -90,6 +90,7 @@ namespace SalesSystem.WebApi.Controllers
         /// Método para alterar um cliente
         /// </summary>
         /// <param name="idCliente"></param>
+        /// <param name="cliente"></param>
         [HttpPut("{idCliente:int}")]
         public async Task<IActionResult> Put(int idCliente, ClienteModel cliente)
         {

@@ -35,7 +35,7 @@ namespace SalesSystem.WebApi.Controllers
                 if (vendas == null)
                     return NotFound("Vendas não encontrados");
                 else
-                    return Ok(await _repository.GetAllVendas());
+                    return Ok(vendas);
             }
             catch (Exception ex)
             {
@@ -107,40 +107,7 @@ namespace SalesSystem.WebApi.Controllers
             }
         }
         #endregion Post
-
-        #region Put
-        /*==== NÃO IREI UTILIZAR O METODO PUT, POIS UMA VENDA NÃO PODE SER EDITADA===        
-        /// <summary>
-        /// Método para alterar uma venda
-        /// </summary>
-        /// <param name="idVenda"></param>
-        [HttpPut("{idVenda:int}")]
-        public async Task<IActionResult> Put(int idVenda, VendaModel venda)
-        {
-            try
-            {
-                var vendaDB = await _repository.GetVenda(idVenda);
-                if (vendaDB != null)
-                {
-                    _repository.Update(venda);
-                    if (await _repository.SaveChanges())
-                        return Ok(venda);
-                    else
-                        return NotFound("Venda não foi alterada, erro ao alterar no banco de dados.");
-                }
-                else
-                {
-                    return NotFound("Venda não encontrada.");
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }        
-        */
-        #endregion Put
-
+        
         #region Delete
         /// <summary>
         /// Método para excluir uma venda
