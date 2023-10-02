@@ -14,12 +14,14 @@ namespace SalesSystem.Mvc.Controllers
     {
         #region Atributos
         private readonly IHttpClientFactory _clientFactory;
+        private readonly HttpClient _httpClient;
         #endregion Atributos
 
         #region Construtor
         public ClienteController(IHttpClientFactory httpClientFactory)
         {
             _clientFactory = httpClientFactory;
+            _httpClient = _clientFactory.CreateClient("HttpClient");
         }
 
         #endregion Construtor
@@ -31,8 +33,8 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/cliente/Get");
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/cliente/Get"); 
+                //Deixei o /Get pq na route da controller estou passando a action, para se ter como exemplo de request.
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -42,7 +44,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }
@@ -80,11 +82,10 @@ namespace SalesSystem.Mvc.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    cliente.Uf = Helper.RetornaDescricaoEnum(Convert.ToInt32(cliente.Uf), "UF");
-                    var client = _clientFactory.CreateClient("HttpClient");
+                    cliente.Uf = Helper.RetornaDescricaoEnum(Convert.ToInt32(cliente.Uf), "UF");                    
                     var jsonCliente = JsonConvert.SerializeObject(cliente);
                     StringContent content = new StringContent(jsonCliente, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PostAsync("/api/cliente/Post", content);
+                    HttpResponseMessage response = await _httpClient.PostAsync("/api/cliente/Post/", content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -93,7 +94,7 @@ namespace SalesSystem.Mvc.Controllers
                     }
                     else
                     {
-                        ViewBag.Erro = response.ReasonPhrase.ToString();
+                        ViewBag.Erro = await response.Content.ReadAsStringAsync();
                         return View("Error");
                     }
                 }
@@ -116,8 +117,7 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/cliente/Get/" + idCliente);
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/cliente/Get/" + idCliente);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -128,7 +128,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }
@@ -153,10 +153,9 @@ namespace SalesSystem.Mvc.Controllers
                     if (int.TryParse(cliente.Uf, out _))
                         cliente.Uf = Helper.RetornaDescricaoEnum(Convert.ToInt32(cliente.Uf), "UF");
 
-                    var client = _clientFactory.CreateClient("HttpClient");
                     var jsonCliente = JsonConvert.SerializeObject(cliente);
                     StringContent content = new StringContent(jsonCliente, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PutAsync("/api/cliente/Put/" + cliente.Id, content);
+                    HttpResponseMessage response = await _httpClient.PutAsync("/api/cliente/Put/" + cliente.Id, content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -165,7 +164,7 @@ namespace SalesSystem.Mvc.Controllers
                     }
                     else
                     {
-                        ViewBag.Erro = response.ReasonPhrase.ToString();
+                        ViewBag.Erro = await response.Content.ReadAsStringAsync();
                         return View("Error");
                     }
                 }
@@ -188,8 +187,7 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/cliente/Get/" + id);
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/cliente/Get/" + id);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -199,7 +197,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }
@@ -218,8 +216,7 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.DeleteAsync("/api/cliente/Delete/" + idCliente);
+                HttpResponseMessage response = await _httpClient.DeleteAsync("/api/cliente/Delete/" + idCliente);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -228,7 +225,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }

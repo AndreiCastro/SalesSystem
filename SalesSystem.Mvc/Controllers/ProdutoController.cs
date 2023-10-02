@@ -14,12 +14,14 @@ namespace SalesSystem.Mvc.Controllers
     {
         #region Atributos
         private readonly IHttpClientFactory _clientFactory;
+        private readonly HttpClient _httpClient;
         #endregion Atributos
 
         #region Construtor
         public ProdutoController(IHttpClientFactory httpClientFactory)
         {
             _clientFactory = httpClientFactory;
+            _httpClient = _clientFactory.CreateClient("HttpClient");
         }
         #endregion Construtor
 
@@ -31,8 +33,7 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 var produtos = new List<ProdutoModel>();
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/produto/Get");
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/produto");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -42,7 +43,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }
@@ -81,10 +82,9 @@ namespace SalesSystem.Mvc.Controllers
                 if (ModelState.IsValid)
                 {
                     produto.UnidadeMedida = Helper.RetornaDescricaoEnum(Convert.ToInt32(produto.UnidadeMedida), "UM");
-                    var client = _clientFactory.CreateClient("HttpClient");
                     var jsonProduto = JsonConvert.SerializeObject(produto);
                     StringContent content = new StringContent(jsonProduto, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PostAsync("/api/produto/Post", content);
+                    HttpResponseMessage response = await _httpClient.PostAsync("/api/produto/", content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -93,7 +93,7 @@ namespace SalesSystem.Mvc.Controllers
                     }
                     else
                     {
-                        ViewBag.Erro = response.ReasonPhrase.ToString();
+                        ViewBag.Erro = await response.Content.ReadAsStringAsync();
                         return View("Error");
                     }
                 }
@@ -117,8 +117,7 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 var produto = new ProdutoModel();
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/produto/Get/" + idProduto);
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/produto/" + idProduto);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -129,7 +128,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }
@@ -154,10 +153,9 @@ namespace SalesSystem.Mvc.Controllers
                     if (int.TryParse(produto.UnidadeMedida, out _))
                         produto.UnidadeMedida = Helper.RetornaDescricaoEnum(Convert.ToInt32(produto.UnidadeMedida), "UM");
 
-                    var client = _clientFactory.CreateClient("HttpClient");
                     var jsonProduto = JsonConvert.SerializeObject(produto);
                     StringContent content = new StringContent(jsonProduto, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PutAsync("/api/produto/Put/" + produto.Id, content);
+                    HttpResponseMessage response = await _httpClient.PutAsync("/api/produto/" + produto.Id, content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -166,7 +164,7 @@ namespace SalesSystem.Mvc.Controllers
                     }
                     else
                     {
-                        ViewBag.Erro = response.ReasonPhrase.ToString();
+                        ViewBag.Erro = await response.Content.ReadAsStringAsync();
                         return View("Error");
                     }
                 }
@@ -190,8 +188,7 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 var produto = new ProdutoModel();
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/produto/Get/" + id);
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/produto/" + id);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -201,7 +198,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }
@@ -221,8 +218,7 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 var produto = new ProdutoModel();
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.DeleteAsync("/api/produto/Delete/" + idProduto);
+                HttpResponseMessage response = await _httpClient.DeleteAsync("/api/produto/" + idProduto);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -231,7 +227,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.RequestMessage;
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }

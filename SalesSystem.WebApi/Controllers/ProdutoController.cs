@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SalesSystem.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]    
+    [Route("api/[controller]")]    
     public class ProdutoController : ControllerBase
     {
         private readonly IProdutoRepository _repository;
@@ -75,7 +75,7 @@ namespace SalesSystem.WebApi.Controllers
                 if (await _repository.SaveChanges())
                     return Ok(produto);
                 else
-                    return NotFound("Prduto não cadastrado, erro ao inserir no banco de dados.");
+                    return Conflict("Produto não cadastrado, erro ao inserir no banco de dados.");
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@ namespace SalesSystem.WebApi.Controllers
                     if (await _repository.SaveChanges())
                         return Ok(produto);
                     else
-                        return NotFound("Poduto não foi alterado, erro ao alterar no banco de dados.");
+                        return Conflict("Poduto não foi alterado, erro ao alterar no banco de dados.");
                 }
                 else
                 {
@@ -132,7 +132,7 @@ namespace SalesSystem.WebApi.Controllers
                     if (await _repository.SaveChanges())
                         return Ok();
                     else
-                        return NotFound("Produto não foi deletado, erro ao deletar no banco de dados.");
+                        return Conflict("Produto não foi deletado, erro ao deletar no banco de dados.");
                 }
                 else
                 {

@@ -14,12 +14,14 @@ namespace SalesSystem.Mvc.Controllers
     {
         #region Atributos
         private readonly IHttpClientFactory _clientFactory;
+        private readonly HttpClient _httpClient;
         #endregion Atributos
 
         #region Construtor
         public VendaController(IHttpClientFactory httpClientFactory)
         {
             _clientFactory = httpClientFactory;
+            _httpClient = _clientFactory.CreateClient("HttpClient");
         }
         #endregion Construtor
 
@@ -31,8 +33,7 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 var vendas = new List<VendaModel>();
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/venda/Get");
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/venda");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -42,7 +43,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }
@@ -62,16 +63,15 @@ namespace SalesSystem.Mvc.Controllers
             {
                 var clientes = new List<ClienteModel>();
                 var produtos = new List<ProdutoModel>();
-
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/cliente/Get");
+                                
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/cliente/Get");
 
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
                     ViewBag.ListaClientes = JsonConvert.DeserializeObject<List<ClienteModel>>(data);
                     
-                    response = await client.GetAsync("/api/produto/Get");
+                    response = await _httpClient.GetAsync("/api/produto");
 
                     if (response.IsSuccessStatusCode) 
                     {
@@ -80,13 +80,13 @@ namespace SalesSystem.Mvc.Controllers
                     }
                     else
                     {
-                        ViewBag.Erro = response.ReasonPhrase.ToString();
+                        ViewBag.Erro = await response.Content.ReadAsStringAsync();
                         return View("Error");
                     }
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
 
@@ -110,10 +110,9 @@ namespace SalesSystem.Mvc.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var client = _clientFactory.CreateClient("HttpClient");
                     var jsonVenda = JsonConvert.SerializeObject(venda);
                     StringContent content = new StringContent(jsonVenda, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PostAsync("/api/venda/Post", content);
+                    HttpResponseMessage response = await _httpClient.PostAsync("/api/venda/", content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -122,7 +121,7 @@ namespace SalesSystem.Mvc.Controllers
                     }
                     else
                     {
-                        ViewBag.Erro = response.ReasonPhrase.ToString();
+                        ViewBag.Erro = await response.Content.ReadAsStringAsync();
                         return View("Error");
                     }
                 }
@@ -146,8 +145,7 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 var venda = new VendaModel();
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/venda/Get/" + id);
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/venda/" + id);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -157,7 +155,7 @@ namespace SalesSystem.Mvc.Controllers
                 }
                 else
                 {
-                    ViewBag.Erro = response.ReasonPhrase.ToString();
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }
@@ -177,33 +175,32 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 var venda = new VendaModel();
-                var client = _clientFactory.CreateClient("HttpClient");
-                HttpResponseMessage response = await client.GetAsync("/api/venda/Get/" + idVenda);
+                HttpResponseMessage response = await _httpClient.GetAsync("/api/venda/" + idVenda);
                 if(response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
                     venda = JsonConvert.DeserializeObject<VendaModel>(data);
                 }
 
-                response = await client.DeleteAsync("/api/venda/Delete/" + idVenda);
+                response = await _httpClient.DeleteAsync("/api/venda/" + idVenda);
                 
                 if (response.IsSuccessStatusCode)
                 {                
-                    response = await client.GetAsync("/api/produto/Get/" + venda.IdProduto);
+                    response = await _httpClient.GetAsync("/api/produto/" + venda.IdProduto);
                     string data = response.Content.ReadAsStringAsync().Result;
                     var produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
                     
                     produto.Quantidade += venda.QuantidadeProduto;
                     var jsonProduto = JsonConvert.SerializeObject(produto);
                     StringContent content = new StringContent(jsonProduto, Encoding.UTF8, "application/json");
-                    response = await client.PutAsync("/api/produto/Put/" + produto.Id, content);
+                    response = await _httpClient.PutAsync("/api/produto/" + produto.Id, content);
 
                     TempData["MensagemSucesso"] = "Venda excluída com sucesso!";
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    ViewBag.Erro = response.RequestMessage;
+                    ViewBag.Erro = await response.Content.ReadAsStringAsync();
                     return View("Error");
                 }
             }

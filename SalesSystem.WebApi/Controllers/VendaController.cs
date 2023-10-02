@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SalesSystem.WebApi.Model;
 using SalesSystem.WebApi.Repository;
 using System;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 namespace SalesSystem.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class VendaController : ControllerBase
     {
         private readonly IVendaRepository _repository;
@@ -54,7 +53,7 @@ namespace SalesSystem.WebApi.Controllers
             {
                 var venda = await _repository.GetVenda(idVenda);
                 if (venda == null)
-                    return BadRequest();
+                    return NotFound("Venda não encontrada.");
                 else
                     return Ok(venda);
             }
@@ -76,10 +75,10 @@ namespace SalesSystem.WebApi.Controllers
             {
                 var produto = await _produtoRepository.GetProduto(venda.IdProduto);
                 if (produto.DataValidade < DateTime.Now)
-                    return BadRequest("Produto fora da data de validade.");
+                    return Conflict("Produto fora da data de validade.");
 
                 if ((produto.Quantidade - venda.QuantidadeProduto) < 0)
-                    return BadRequest("Estoque do produto insuficiente.");
+                    return Conflict("Estoque do produto insuficiente.");
 
                 venda.DataVenda = DateTime.Now;
                 venda.ValorTotal = venda.Desconto == null ? produto.Preco * venda.QuantidadeProduto 
@@ -94,11 +93,11 @@ namespace SalesSystem.WebApi.Controllers
                     if (await _repository.SaveChanges())
                         return Ok(venda);
                     else
-                        return BadRequest("Erro ao alterar quantidade do produto vendido.");
+                        return Conflict("Erro ao alterar quantidade do produto vendido.");
                 }
                 else
                 {
-                    return NotFound("Venda não cadastrada, erro ao inserir no banco de dados.");
+                    return Conflict("Venda não cadastrada, erro ao inserir no banco de dados.");
                 }
             }
             catch (Exception ex)
@@ -125,7 +124,7 @@ namespace SalesSystem.WebApi.Controllers
                     if (await _repository.SaveChanges())                    
                         return Ok();
                     else
-                        return BadRequest("Erro ao alterar o produto.");                 
+                        return Conflict("Erro ao alterar o produto.");                 
                 }
                 else
                 {

@@ -1,0 +1,13 @@
+* Quando rodar o projeto colocar os dois projetos juntos para serem executados.
+
+* Sempre que usar o Entity Framework precisa realizar a instação dos pacotes EF.
+	Step:
+	* Btn direito no projeto -> Manage NuGet Packages..	
+	* Vá na aba Browse e coloca: Microsoft.EntityFrameworkCore
+	* Vai exibir uma lista, ai clica pra intalar: 
+		PS: Sempre utilizar a versão igual ou inferior ao framework que esta usando. Ex: Esta usando .Net Core 5.0, instalar as libs abaixo na versão 5.0 tbm.	
+		- Microsoft.EntityFrameworkCore
+		- Microsoft.EntityFrameworkCore.Design
+		- Microsoft.EntityFrameworkCore.Tools
+		- Microsoft.EntityFrameworkCore.SqlServer
+ 

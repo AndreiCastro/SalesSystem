@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace SalesSystem.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]    
+    [Route("api/[controller]/[action]")] 
+    //Deixa o /[action] pra usar de exemplo, pois pode-se colocar a ação da requisição. Já nas outras Controllers não tem o action
     public class ClienteController : ControllerBase
     {
         private readonly IClienteRepository _repository;
@@ -37,8 +38,7 @@ namespace SalesSystem.WebApi.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }
-            
+            }            
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace SalesSystem.WebApi.Controllers
                 if (await _repository.SaveChanges())
                     return Ok(cliente);
                 else
-                    return NotFound("Cliente não cadastrado, erro ao inserir no banco de dados.");
+                    return Conflict("Cliente não cadastrado, erro ao inserir no banco de dados.");
             }
             catch (Exception ex)
             {
@@ -103,7 +103,7 @@ namespace SalesSystem.WebApi.Controllers
                     if (await _repository.SaveChanges())
                         return Ok(cliente);
                     else
-                        return NotFound("Cliente não foi alterado, erro ao alterar no banco de dados.");
+                        return Conflict("Cliente não foi alterado, erro ao alterar no banco de dados.");
                 }
                 else
                 {
@@ -134,7 +134,7 @@ namespace SalesSystem.WebApi.Controllers
                     if (await _repository.SaveChanges())
                         return Ok();
                     else
-                        return NotFound("Cliente não foi deletado, erro ao deletar no banco de dados.");
+                        return Conflict("Cliente não foi deletado, erro ao deletar no banco de dados.");
                 }
                 else
                 {
