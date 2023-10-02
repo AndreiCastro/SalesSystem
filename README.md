@@ -1,8 +1,20 @@
 <h1>Sales System - MVP</h1>
+<table>
+  <tr>
+    <td>Back-end</td>
+    <td>Front-end</td>
+  </tr>
+  <tr>
+    <td>Asp.Net Core 3.1 - Api Rest</td>
+    <td>MVC - Razor e JavaScript</td>
+  </tr>
+</table>
+
+<h2>Realizando a persistência e recuperação de dados de outro projeto, via API Rest.</h2>
 
 ![Capturar](https://github.com/AndreiCastro/SalesSystem/assets/25482574/e33c1389-da4e-41a8-9e61-b42f97eeed8a)
 
-### Projeto de um sistema de vendas com CRUD para: Cliente - Produto - Venda. Realizando a persistência e recuperação de dados via API Rest.
+### Projeto de um sistema de vendas com CRUD para: Cliente - Produto - Venda. 
 
 ### Status: Finalizado
 
@@ -55,7 +67,7 @@
   <tr>
     <td>Visual Studio 2022</td>
     <td>C# 8</td>
-    <td>.Net Core 3.1</td>
+    <td>Asp.Net Core 3.1</td>
     <td>2022 16.0.1</td>
     <td>Entity Framework 3.1.0</td>
     <td>Razor e JavaScript</td>
