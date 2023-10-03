@@ -31,7 +31,7 @@ namespace SalesSystem.WebApi.Controllers
             {
                 var clientes = await _repository.GetAllClientes();
                 if (clientes == null)
-                    return NotFound("Clientes não encontrados");
+                    return Conflict("Clientes não encontrados");
                 else
                     return Ok(clientes);
             }
@@ -52,7 +52,7 @@ namespace SalesSystem.WebApi.Controllers
             {
                 var cliente = await _repository.GetCliente(idCliente);
                 if (cliente == null)
-                    return NotFound("Cliente não encontrado");
+                    return Conflict("Cliente não encontrado");
                 else
                     return Ok(cliente);                
             }
@@ -107,7 +107,7 @@ namespace SalesSystem.WebApi.Controllers
                 }
                 else
                 {
-                    return NotFound("Cliente não encontrado.");
+                    return Conflict("Cliente não encontrado.");
                 }
             }
             catch (Exception ex)
@@ -138,7 +138,7 @@ namespace SalesSystem.WebApi.Controllers
                 }
                 else
                 {
-                    return NotFound("Cliente não encontrado.");
+                    return Conflict("Cliente não encontrado.");
                 }
             }
             catch (Exception ex)

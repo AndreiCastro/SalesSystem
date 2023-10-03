@@ -28,7 +28,11 @@ namespace SalesSystem.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Context>(
-                context => context.UseSqlServer(Configuration.GetConnectionString("Conexao")));
+                context => { 
+                    context.UseSqlServer(Configuration.GetConnectionString("Conexao"));
+                    context.EnableSensitiveDataLogging();
+                });
+                
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();

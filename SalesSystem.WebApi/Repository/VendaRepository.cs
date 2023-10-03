@@ -18,7 +18,7 @@ namespace SalesSystem.WebApi.Repository
 
         public async Task<List<VendaModel>> GetAllVendas()
         {
-            return await _context.Vendas.AsNoTracking()
+            return await _context.Vendas.AsNoTrackingWithIdentityResolution()
                 .Include(c => c.Cliente)
                 .Include(p => p.Produto)
                 .OrderBy(x => x.Id)
@@ -27,7 +27,7 @@ namespace SalesSystem.WebApi.Repository
 
         public async Task<VendaModel> GetVenda(int id)
         {
-            return await _context.Vendas.AsNoTracking()
+            return await _context.Vendas.AsNoTrackingWithIdentityResolution()
                 .Include(c => c.Cliente)
                 .Include(p => p.Produto)
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -41,7 +41,7 @@ namespace SalesSystem.WebApi.Repository
 
         public void Delete(VendaModel venda)
         {
-            _context.Remove(venda);
+            _context.Remove(venda);            
         }
 
         public void Update(VendaModel venda)
@@ -51,7 +51,7 @@ namespace SalesSystem.WebApi.Repository
 
         public async Task<bool> SaveChanges()
         {
-            return (await _context.SaveChangesAsync() > 0);
+            return (await _context.SaveChangesAsync() > 0);            
         }
     }
 }

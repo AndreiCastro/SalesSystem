@@ -32,13 +32,11 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var vendas = new List<VendaModel>();
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/venda");
-
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    vendas = JsonConvert.DeserializeObject<List<VendaModel>>(data);
+                    var vendas = JsonConvert.DeserializeObject<List<VendaModel>>(data);
                     return View(vendas);
                 }
                 else
@@ -61,19 +59,14 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var clientes = new List<ClienteModel>();
-                var produtos = new List<ProdutoModel>();
-                                
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/cliente/Get");
-
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
                     ViewBag.ListaClientes = JsonConvert.DeserializeObject<List<ClienteModel>>(data);
-                    
                     response = await _httpClient.GetAsync("/api/produto");
 
-                    if (response.IsSuccessStatusCode) 
+                    if (response.IsSuccessStatusCode)
                     {
                         data = response.Content.ReadAsStringAsync().Result;
                         ViewBag.ListaProdutos = JsonConvert.DeserializeObject<List<ProdutoModel>>(data);
@@ -144,13 +137,11 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var venda = new VendaModel();
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/venda/" + id);
-
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    venda = JsonConvert.DeserializeObject<VendaModel>(data);
+                    var venda = JsonConvert.DeserializeObject<VendaModel>(data);
                     return View(venda);
                 }
                 else
@@ -171,9 +162,9 @@ namespace SalesSystem.Mvc.Controllers
         /// </summary>       
         /// <param name="idVenda"></param>
         public async Task<IActionResult> DeleteConfirm(int idVenda)
-        {
+        {            
             try
-            {
+            {                
                 var venda = new VendaModel();
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/venda/" + idVenda);
                 if(response.IsSuccessStatusCode)
@@ -181,11 +172,10 @@ namespace SalesSystem.Mvc.Controllers
                     string data = response.Content.ReadAsStringAsync().Result;
                     venda = JsonConvert.DeserializeObject<VendaModel>(data);
                 }
-
                 response = await _httpClient.DeleteAsync("/api/venda/" + idVenda);
                 
                 if (response.IsSuccessStatusCode)
-                {                
+                {
                     response = await _httpClient.GetAsync("/api/produto/" + venda.IdProduto);
                     string data = response.Content.ReadAsStringAsync().Result;
                     var produto = JsonConvert.DeserializeObject<ProdutoModel>(data);

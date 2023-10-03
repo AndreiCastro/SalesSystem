@@ -18,12 +18,12 @@ namespace SalesSystem.WebApi.Repository
 
         public async Task<List<ProdutoModel>> GetAllProdutos()
         {
-            return await _context.Produtos.AsNoTracking().OrderBy(x => x.Nome).ToListAsync();
+            return await _context.Produtos.AsNoTrackingWithIdentityResolution().OrderBy(x => x.Nome).ToListAsync();
         }
 
         public async Task<ProdutoModel> GetProduto(int id)
         {
-            return await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Produtos.AsNoTrackingWithIdentityResolution().FirstOrDefaultAsync(x => x.Id == id);
         }
 
 

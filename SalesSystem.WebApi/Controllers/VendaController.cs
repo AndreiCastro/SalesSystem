@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesSystem.WebApi.Data;
 using SalesSystem.WebApi.Model;
 using SalesSystem.WebApi.Repository;
 using System;
@@ -32,7 +33,7 @@ namespace SalesSystem.WebApi.Controllers
             {
                 var vendas = await _repository.GetAllVendas();
                 if (vendas == null)
-                    return NotFound("Vendas não encontrados");
+                    return Conflict("Vendas não encontrados");
                 else
                     return Ok(vendas);
             }
@@ -53,7 +54,7 @@ namespace SalesSystem.WebApi.Controllers
             {
                 var venda = await _repository.GetVenda(idVenda);
                 if (venda == null)
-                    return NotFound("Venda não encontrada.");
+                    return Conflict("Venda não encontrada.");
                 else
                     return Ok(venda);
             }
@@ -119,16 +120,16 @@ namespace SalesSystem.WebApi.Controllers
             {
                 var venda = await _repository.GetVenda(idVenda);
                 if (venda != null)
-                {                    
+                {
                     _repository.Delete(venda);
-                    if (await _repository.SaveChanges())                    
+                    if (await _repository.SaveChanges())
                         return Ok();
                     else
-                        return Conflict("Erro ao alterar o produto.");                 
+                        return Conflict("Erro ao excluir venda.");
                 }
                 else
                 {
-                    return NotFound("Venda não encontrada.");
+                    return Conflict("Venda não encontrada.");
                 }
             }
             catch (Exception ex)

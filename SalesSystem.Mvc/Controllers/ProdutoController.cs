@@ -32,13 +32,11 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var produtos = new List<ProdutoModel>();
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/produto");
-
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    produtos = JsonConvert.DeserializeObject<List<ProdutoModel>>(data);
+                    var produtos = JsonConvert.DeserializeObject<List<ProdutoModel>>(data);
                     return View(produtos);
                 }
                 else
@@ -116,13 +114,11 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var produto = new ProdutoModel();
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/produto/" + idProduto);
-
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
+                    var produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
                     ViewBag.UnidadeMedida = produto.UnidadeMedida;
                     return View(produto);
                 }
@@ -187,13 +183,11 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var produto = new ProdutoModel();
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/produto/" + id);
-
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
+                    var produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
                     return View(produto);
                 }
                 else
@@ -217,9 +211,7 @@ namespace SalesSystem.Mvc.Controllers
         {
             try
             {
-                var produto = new ProdutoModel();
                 HttpResponseMessage response = await _httpClient.DeleteAsync("/api/produto/" + idProduto);
-
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["MensagemSucesso"] = "Produto excluído com sucesso!";

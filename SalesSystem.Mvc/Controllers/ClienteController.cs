@@ -35,7 +35,6 @@ namespace SalesSystem.Mvc.Controllers
             {
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/cliente/Get"); 
                 //Deixei o /Get pq na route da controller estou passando a action, para se ter como exemplo de request.
-
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
@@ -118,7 +117,6 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/cliente/Get/" + idCliente);
-
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
@@ -188,7 +186,6 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 HttpResponseMessage response = await _httpClient.GetAsync("/api/cliente/Get/" + id);
-
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
@@ -217,7 +214,6 @@ namespace SalesSystem.Mvc.Controllers
             try
             {
                 HttpResponseMessage response = await _httpClient.DeleteAsync("/api/cliente/Delete/" + idCliente);
-
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["MensagemSucesso"] = "Cliente excluído com sucesso!";

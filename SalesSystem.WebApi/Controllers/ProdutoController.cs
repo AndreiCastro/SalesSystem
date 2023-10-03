@@ -30,7 +30,7 @@ namespace SalesSystem.WebApi.Controllers
             {
                 var produtos = await _repository.GetAllProdutos();
                 if (produtos == null)
-                    return NotFound("Produtos não encontrados");
+                    return Conflict("Produtos não encontrados");
                 else
                     return Ok(produtos);
             }
@@ -51,7 +51,7 @@ namespace SalesSystem.WebApi.Controllers
             {
                 var produto = await _repository.GetProduto(idProduto);
                 if (produto == null)
-                    return NotFound("Produto não encontrado");
+                    return Conflict("Produto não encontrado");
                 else
                     return Ok(produto);
             }
@@ -105,7 +105,7 @@ namespace SalesSystem.WebApi.Controllers
                 }
                 else
                 {
-                    return NotFound("Produto não encontrado.");
+                    return Conflict("Produto não encontrado.");
                 }
             }
             catch (Exception ex)
@@ -136,7 +136,7 @@ namespace SalesSystem.WebApi.Controllers
                 }
                 else
                 {
-                    return NotFound("Produto não encontrado.");
+                    return Conflict("Produto não encontrado.");
                 }
             }
             catch (Exception ex)
