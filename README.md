@@ -1,11 +1,11 @@
-<h1>Sales System - MVP</h1>
+<h1>Sales System</h1>
 <table>
   <tr>
     <td>Back-end</td>
     <td>Front-end</td>
   </tr>
   <tr>
-    <td>Asp.Net Core 3.1 - Api Rest</td>
+    <td>Asp.Net Core 5.0 - Api Rest</td>
     <td>MVC - Razor e JavaScript</td>
   </tr>
 </table>
@@ -67,7 +67,7 @@
   <tr>
     <td>Visual Studio 2022</td>
     <td>C# 8</td>
-    <td>Asp.Net Core 3.1</td>
+    <td>Asp.Net Core 5.0</td>
     <td>2022 16.0.1</td>
     <td>Entity Framework 3.1.0</td>
     <td>Razor e JavaScript</td>
