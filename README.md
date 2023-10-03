@@ -7,7 +7,7 @@
   </tr>
   <tr>
     <td>Asp.Net Core 5.0 - Api Rest</td>
-    <td>MVC - Razor e JavaScript</td>
+    <td>Razor e JavaScript</td>
   </tr>
 </table>
 
