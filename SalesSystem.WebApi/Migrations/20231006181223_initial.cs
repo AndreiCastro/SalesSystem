@@ -11,17 +11,17 @@ namespace SalesSystem.WebApi.Migrations
                 name: "Clientes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(maxLength: 40, nullable: false),
-                    Email = table.Column<string>(maxLength: 30, nullable: false),
-                    CpfCnpj = table.Column<string>(maxLength: 14, nullable: false),
-                    Logradouro = table.Column<string>(maxLength: 30, nullable: false),
-                    Bairro = table.Column<string>(maxLength: 20, nullable: false),
-                    Uf = table.Column<string>(maxLength: 2, nullable: false),
-                    Cep = table.Column<string>(maxLength: 10, nullable: false),
-                    Cidade = table.Column<string>(maxLength: 20, nullable: false),
-                    Telefone = table.Column<string>(maxLength: 14, nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    CpfCnpj = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
+                    Logradouro = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Bairro = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Uf = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
+                    Cep = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Cidade = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Telefone = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,15 +32,15 @@ namespace SalesSystem.WebApi.Migrations
                 name: "Produtos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(maxLength: 40, nullable: false),
-                    Descricao = table.Column<string>(nullable: false),
-                    Preco = table.Column<decimal>(nullable: false),
-                    UnidadeMedida = table.Column<string>(maxLength: 3, nullable: false),
-                    Quantidade = table.Column<int>(nullable: false),
-                    Peso = table.Column<int>(nullable: false),
-                    DataValidade = table.Column<DateTime>(nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UnidadeMedida = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    Peso = table.Column<int>(type: "int", nullable: false),
+                    DataValidade = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,15 +51,15 @@ namespace SalesSystem.WebApi.Migrations
                 name: "Vendas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DataVenda = table.Column<DateTime>(nullable: false),
-                    QuantidadeProduto = table.Column<int>(nullable: false),
-                    ValorTotal = table.Column<decimal>(nullable: false),
-                    Descricao = table.Column<string>(maxLength: 100, nullable: true),
-                    Desconto = table.Column<decimal>(nullable: true),
-                    IdCliente = table.Column<int>(nullable: false),
-                    IdProduto = table.Column<int>(nullable: false)
+                    DataVenda = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    QuantidadeProduto = table.Column<int>(type: "int", nullable: false),
+                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Desconto = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    IdCliente = table.Column<int>(type: "int", nullable: false),
+                    IdProduto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
