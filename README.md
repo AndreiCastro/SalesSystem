@@ -10,6 +10,18 @@
     <td>Razor e JavaScript</td>
   </tr>
 </table>
+</table>
+<h3>Projeto de Teste</h3>
+<table>
+  <tr>
+    <td>Test</td>
+    <td>Framework</td>
+  </tr>
+  <tr>
+    <td>NUnit</td>
+    <td>Moq</td>
+  </tr>
+</table>
 
 <h2>Realizando a persistência e recuperação de dados de outro projeto, via API Rest.</h2>
 
