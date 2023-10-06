@@ -166,24 +166,18 @@ namespace SalesSystem.Mvc.Controllers
             try
             {                
                 var venda = new VendaModel();
-                HttpResponseMessage response = await _httpClient.GetAsync("/api/venda/" + idVenda);
-                if(response.IsSuccessStatusCode)
-                {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    venda = JsonConvert.DeserializeObject<VendaModel>(data);
-                }
-                response = await _httpClient.DeleteAsync("/api/venda/" + idVenda);
+                HttpResponseMessage response = await _httpClient.DeleteAsync("/api/venda/" + idVenda);
                 
                 if (response.IsSuccessStatusCode)
                 {
-                    response = await _httpClient.GetAsync("/api/produto/" + venda.IdProduto);
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    var produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
+                    //response = await _httpClient.GetAsync("/api/produto/" + venda.IdProduto);
+                    //string data = response.Content.ReadAsStringAsync().Result;
+                    //var produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
                     
-                    produto.Quantidade += venda.QuantidadeProduto;
-                    var jsonProduto = JsonConvert.SerializeObject(produto);
-                    StringContent content = new StringContent(jsonProduto, Encoding.UTF8, "application/json");
-                    response = await _httpClient.PutAsync("/api/produto/" + produto.Id, content);
+                    //produto.Quantidade += venda.QuantidadeProduto;
+                    //var jsonProduto = JsonConvert.SerializeObject(produto);
+                    //StringContent content = new StringContent(jsonProduto, Encoding.UTF8, "application/json");
+                    //response = await _httpClient.PutAsync("/api/produto/" + produto.Id, content);
 
                     TempData["MensagemSucesso"] = "Venda excluída com sucesso!";
                     return RedirectToAction("Index");

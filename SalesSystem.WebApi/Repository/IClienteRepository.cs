@@ -8,7 +8,7 @@ namespace SalesSystem.WebApi.Repository
     {
         Task<List<ClienteModel>> GetAllClientes();
 
-        Task<ClienteModel> GetCliente(int idCliente);
+        Task<ClienteModel> GetClientePorId(int idCliente);
 
         void Add(ClienteModel cliente);
 

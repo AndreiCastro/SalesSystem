@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SalesSystem.Mvc\SalesSystem.Mvc.csproj" />
     <ProjectReference Include="..\SalesSystem.WebApi\SalesSystem.WebApi.csproj" />
   </ItemGroup>
 

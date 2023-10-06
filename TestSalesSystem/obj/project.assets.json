@@ -2722,6 +2722,22 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "SalesSystem.Mvc/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "SalesSystem.WebApi": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SalesSystem.Mvc.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SalesSystem.Mvc.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "SalesSystem.WebApi/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -8467,6 +8483,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "SalesSystem.Mvc/1.0.0": {
+      "type": "project",
+      "path": "../SalesSystem.Mvc/SalesSystem.Mvc.csproj",
+      "msbuildProject": "../SalesSystem.Mvc/SalesSystem.Mvc.csproj"
+    },
     "SalesSystem.WebApi/1.0.0": {
       "type": "project",
       "path": "../SalesSystem.WebApi/SalesSystem.WebApi.csproj",
@@ -8480,6 +8501,7 @@
       "NUnit >= 3.13.3",
       "NUnit.Analyzers >= 3.6.1",
       "NUnit3TestAdapter >= 4.4.2",
+      "SalesSystem.Mvc >= 1.0.0",
       "SalesSystem.WebApi >= 1.0.0",
       "coverlet.collector >= 3.2.0"
     ]
@@ -8511,6 +8533,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\Users\\andrei\\source\\repos\\MyProjects\\SalesSystem\\SalesSystem.Mvc\\SalesSystem.Mvc.csproj": {
+              "projectPath": "C:\\Users\\andrei\\source\\repos\\MyProjects\\SalesSystem\\SalesSystem.Mvc\\SalesSystem.Mvc.csproj"
+            },
             "C:\\Users\\andrei\\source\\repos\\MyProjects\\SalesSystem\\SalesSystem.WebApi\\SalesSystem.WebApi.csproj": {
               "projectPath": "C:\\Users\\andrei\\source\\repos\\MyProjects\\SalesSystem\\SalesSystem.WebApi\\SalesSystem.WebApi.csproj"
             }

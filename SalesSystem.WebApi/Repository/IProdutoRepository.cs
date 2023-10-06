@@ -8,7 +8,7 @@ namespace SalesSystem.WebApi.Repository
     {
         Task<List<ProdutoModel>> GetAllProdutos();
 
-        Task<ProdutoModel> GetProduto(int idProduto);
+        Task<ProdutoModel> GetProdutoPorId(int idProduto);
 
         void Add(ProdutoModel produto);
 

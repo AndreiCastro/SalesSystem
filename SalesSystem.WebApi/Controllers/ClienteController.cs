@@ -50,7 +50,7 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var cliente = await _repository.GetCliente(idCliente);
+                var cliente = await _repository.GetClientePorId(idCliente);
                 if (cliente == null)
                     return Conflict("Cliente não encontrado");
                 else
@@ -96,7 +96,7 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var clienteDB = await _repository.GetCliente(idCliente);
+                var clienteDB = await _repository.GetClientePorId(idCliente);
                 if (clienteDB != null)
                 {
                     _repository.Update(cliente);
@@ -127,7 +127,7 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var cliente = await _repository.GetCliente(idCliente);
+                var cliente = await _repository.GetClientePorId(idCliente);
                 if (cliente != null)
                 {
                     _repository.Delete(cliente);

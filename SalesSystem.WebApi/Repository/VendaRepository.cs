@@ -25,7 +25,7 @@ namespace SalesSystem.WebApi.Repository
                 .ToListAsync();
         }
 
-        public async Task<VendaModel> GetVenda(int id)
+        public async Task<VendaModel> GetVendaPorId(int id)
         {
             return await _context.Vendas.AsNoTrackingWithIdentityResolution()
                 .Include(c => c.Cliente)
@@ -39,9 +39,15 @@ namespace SalesSystem.WebApi.Repository
             _context.AddAsync(venda);
         }
 
+        public void ChangeTrackerClear()
+        {
+            //Esse metodo serve somente para não dar erro: ChangeTracking.Internal.IdentityMap
+            _context.ChangeTracker.Clear();
+        }
+
         public void Delete(VendaModel venda)
         {
-            _context.Remove(venda);            
+            _context.Remove(venda);
         }
 
         public void Update(VendaModel venda)

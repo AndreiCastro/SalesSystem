@@ -8,14 +8,16 @@ namespace SalesSystem.WebApi.Repository
     {
         Task<List<VendaModel>> GetAllVendas();
 
-        Task<VendaModel> GetVenda(int idVenda);
+        Task<VendaModel> GetVendaPorId(int idVenda);
 
         void Add(VendaModel venda);
+
+        void ChangeTrackerClear();
 
         void Delete(VendaModel venda);
 
         void Update(VendaModel venda);
 
-        Task<bool> SaveChanges();
+        Task<bool> SaveChanges();        
     }
 }

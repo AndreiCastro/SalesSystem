@@ -49,7 +49,7 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var produto = await _repository.GetProduto(idProduto);
+                var produto = await _repository.GetProdutoPorId(idProduto);
                 if (produto == null)
                     return Conflict("Produto não encontrado");
                 else
@@ -94,7 +94,7 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var produtoDB = await _repository.GetProduto(idProduto);
+                var produtoDB = await _repository.GetProdutoPorId(idProduto);
                 if (produtoDB != null)
                 {
                     _repository.Update(produto);
@@ -125,7 +125,7 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var produto = await _repository.GetProduto(idProduto);
+                var produto = await _repository.GetProdutoPorId(idProduto);
                 if (produto != null)
                 {
                     _repository.Delete(produto);

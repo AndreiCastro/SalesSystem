@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalesSystem.WebApi.Data;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SalesSystem.WebApi.Model;
 using SalesSystem.WebApi.Repository;
 using System;
@@ -52,7 +52,7 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var venda = await _repository.GetVenda(idVenda);
+                var venda = await _repository.GetVendaPorId(idVenda);
                 if (venda == null)
                     return Conflict("Venda não encontrada.");
                 else
@@ -74,32 +74,13 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var produto = await _produtoRepository.GetProduto(venda.IdProduto);
-                if (produto.DataValidade < DateTime.Now)
-                    return Conflict("Produto fora da data de validade.");
+                var vendaModel = new VendaModel(_repository, _produtoRepository);
+                (bool valido, string textoErro) = await vendaModel.ValidaInclusaoVenda(venda);
 
-                if ((produto.Quantidade - venda.QuantidadeProduto) < 0)
-                    return Conflict("Estoque do produto insuficiente.");
-
-                venda.DataVenda = DateTime.Now;
-                venda.ValorTotal = venda.Desconto == null ? produto.Preco * venda.QuantidadeProduto 
-                    : (produto.Preco * venda.QuantidadeProduto) - Convert.ToDecimal(venda.Desconto);
-
-                _repository.Add(venda);
-                if (await _repository.SaveChanges())
-                {
-                    produto.Quantidade -= venda.QuantidadeProduto;
-                    _produtoRepository.Update(produto);
-
-                    if (await _repository.SaveChanges())
-                        return Ok(venda);
-                    else
-                        return Conflict("Erro ao alterar quantidade do produto vendido.");
-                }
+                if (valido)
+                    return Ok(venda);
                 else
-                {
-                    return Conflict("Venda não cadastrada, erro ao inserir no banco de dados.");
-                }
+                    return Conflict(textoErro);
             }
             catch (Exception ex)
             {
@@ -118,19 +99,13 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var venda = await _repository.GetVenda(idVenda);
-                if (venda != null)
-                {
-                    _repository.Delete(venda);
-                    if (await _repository.SaveChanges())
+                var vendaModel = new VendaModel(_repository, _produtoRepository);
+                (bool valido, string textoErro) = await vendaModel.ValidaExclusaoVenda(idVenda);
+
+                if (valido)
                         return Ok();
                     else
-                        return Conflict("Erro ao excluir venda.");
-                }
-                else
-                {
-                    return Conflict("Venda não encontrada.");
-                }
+                        return Conflict(textoErro);
             }
             catch (Exception ex)
             {

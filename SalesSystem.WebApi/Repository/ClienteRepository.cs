@@ -21,7 +21,7 @@ namespace SalesSystem.WebApi.Repository
             return await _context.Clientes.AsNoTrackingWithIdentityResolution().OrderBy(x => x.Nome).ToListAsync();
         }
 
-        public async Task<ClienteModel> GetCliente(int id)
+        public async Task<ClienteModel> GetClientePorId(int id)
         {
             return await _context.Clientes.AsNoTrackingWithIdentityResolution().FirstOrDefaultAsync(x => x.Id == id);
         }
