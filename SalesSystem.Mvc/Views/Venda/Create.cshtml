@@ -1,4 +1,4 @@
-﻿@model SalesSystem.WebApi.Model.VendaModel
+﻿@model SalesSystem.WebApi.Dtos.VendaDto
 
 @{
     ViewData["Title"] = "Registrar Venda";
@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <label for="text" class="col-form-label">Cliente</label>
                     <select asp-for="IdCliente" class="form-control">
-                        @foreach (var cliente in (List<SalesSystem.WebApi.Model.ClienteModel>)ViewBag.ListaClientes)
+                        @foreach (var cliente in (List<SalesSystem.WebApi.Dtos.ClienteDto>)ViewBag.ListaClientes)
                         {
                             <option value="@cliente.Id">@cliente.Nome</option>
                         }
@@ -27,7 +27,7 @@
                 <div class="col-12">
                     <label for="text" class="col-form-label">Produtos</label>
                     <select asp-for="IdProduto" class="form-control">
-                        @foreach (var produto in (List<SalesSystem.WebApi.Model.ProdutoModel>)ViewBag.ListaProdutos)
+                        @foreach (var produto in (List<SalesSystem.WebApi.Dtos.ProdutoDto>)ViewBag.ListaProdutos)
                         {
                             <option value="@produto.Id">@produto.Nome</option>
                         }

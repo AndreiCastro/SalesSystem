@@ -132,3 +132,9 @@ C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\obj\Debug
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\obj\Debug\net5.0\SalesSystem.WebApi.pdb
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\obj\Debug\net5.0\SalesSystem.WebApi.genruntimeconfig.cache
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\obj\Debug\net5.0\ref\SalesSystem.WebApi.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.WebApi\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll

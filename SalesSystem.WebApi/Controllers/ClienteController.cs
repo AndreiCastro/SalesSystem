@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using SalesSystem.WebApi.Dtos;
 using SalesSystem.WebApi.Model;
 using SalesSystem.WebApi.Repository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SalesSystem.WebApi.Controllers
@@ -12,11 +15,13 @@ namespace SalesSystem.WebApi.Controllers
     public class ClienteController : ControllerBase
     {
         private readonly IClienteRepository _repository;
+        private readonly IMapper _mapper;
 
         #region Construtor
-        public ClienteController(IClienteRepository repository)
+        public ClienteController(IClienteRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         #endregion Construtor
 
@@ -29,11 +34,12 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var clientes = await _repository.GetAllClientes();
-                if (clientes == null)
+                var clientesModel = await _repository.GetAllClientes();
+                var clientesDto = _mapper.Map<List<ClienteDto>>(clientesModel);
+                if (clientesDto == null)
                     return Conflict("Clientes não encontrados");
                 else
-                    return Ok(clientes);
+                    return Ok(clientesDto);
             }
             catch (Exception ex)
             {
@@ -50,11 +56,12 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var cliente = await _repository.GetClientePorId(idCliente);
-                if (cliente == null)
+                var clienteModel = await _repository.GetClientePorId(idCliente);
+                var clienteDto = _mapper.Map<ClienteDto>(clienteModel);
+                if (clienteDto == null)
                     return Conflict("Cliente não encontrado");
                 else
-                    return Ok(cliente);                
+                    return Ok(clienteDto);                
             }
             catch (Exception ex)
             {
@@ -68,13 +75,14 @@ namespace SalesSystem.WebApi.Controllers
         /// Método para cadastrar um cliente
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> Post(ClienteModel cliente)
+        public async Task<IActionResult> Post(ClienteDto clienteDto)
         {
             try
             {
-                _repository.Add(cliente);
+                var clienteModel = _mapper.Map<ClienteModel>(clienteDto);
+                _repository.Add(clienteModel);
                 if (await _repository.SaveChanges())
-                    return Ok(cliente);
+                    return Ok(clienteDto);
                 else
                     return Conflict("Cliente não cadastrado, erro ao inserir no banco de dados.");
             }
@@ -92,16 +100,17 @@ namespace SalesSystem.WebApi.Controllers
         /// <param name="idCliente"></param>
         /// <param name="cliente"></param>
         [HttpPut("{idCliente:int}")]
-        public async Task<IActionResult> Put(int idCliente, ClienteModel cliente)
+        public async Task<IActionResult> Put(int idCliente, ClienteDto clienteDto)
         {
             try
             {
                 var clienteDB = await _repository.GetClientePorId(idCliente);
                 if (clienteDB != null)
                 {
-                    _repository.Update(cliente);
+                    var clienteModel = _mapper.Map<ClienteModel>(clienteDto);
+                    _repository.Update(clienteModel);
                     if (await _repository.SaveChanges())
-                        return Ok(cliente);
+                        return Ok(clienteDto);
                     else
                         return Conflict("Cliente não foi alterado, erro ao alterar no banco de dados.");
                 }
@@ -127,10 +136,10 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var cliente = await _repository.GetClientePorId(idCliente);
-                if (cliente != null)
+                var clienteModel = await _repository.GetClientePorId(idCliente);
+                if (clienteModel != null)
                 {
-                    _repository.Delete(cliente);
+                    _repository.Delete(clienteModel);
                     if (await _repository.SaveChanges())
                         return Ok();
                     else

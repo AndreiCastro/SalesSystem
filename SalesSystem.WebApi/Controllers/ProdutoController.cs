@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using SalesSystem.WebApi.Dtos;
 using SalesSystem.WebApi.Model;
 using SalesSystem.WebApi.Repository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SalesSystem.WebApi.Controllers
@@ -11,11 +14,13 @@ namespace SalesSystem.WebApi.Controllers
     public class ProdutoController : ControllerBase
     {
         private readonly IProdutoRepository _repository;
+        private readonly IMapper _mapper;
 
         #region Construtor
-        public ProdutoController(IProdutoRepository repository)
+        public ProdutoController(IProdutoRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         #endregion Construtor
 
@@ -28,11 +33,12 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var produtos = await _repository.GetAllProdutos();
-                if (produtos == null)
+                var produtosModel = await _repository.GetAllProdutos();
+                var produtosDto = _mapper.Map<List<ProdutoDto>>(produtosModel);
+                if (produtosDto == null)
                     return Conflict("Produtos não encontrados");
                 else
-                    return Ok(produtos);
+                    return Ok(produtosDto);
             }
             catch (Exception ex)
             {
@@ -49,11 +55,12 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var produto = await _repository.GetProdutoPorId(idProduto);
-                if (produto == null)
+                var produtoModel = await _repository.GetProdutoPorId(idProduto);
+                var produtoDto = _mapper.Map<ProdutoDto>(produtoModel);
+                if (produtoDto == null)
                     return Conflict("Produto não encontrado");
                 else
-                    return Ok(produto);
+                    return Ok(produtoDto);
             }
             catch (Exception ex)
             {
@@ -67,13 +74,14 @@ namespace SalesSystem.WebApi.Controllers
         /// Método para cadastrar um produto
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> Post(ProdutoModel produto)
+        public async Task<IActionResult> Post(ProdutoDto produtoDto)
         {
             try
             {
-                _repository.Add(produto);
+                var produtoModel = _mapper.Map<ProdutoModel>(produtoDto);
+                _repository.Add(produtoModel);
                 if (await _repository.SaveChanges())
-                    return Ok(produto);
+                    return Ok(produtoDto);
                 else
                     return Conflict("Produto não cadastrado, erro ao inserir no banco de dados.");
             }
@@ -90,16 +98,17 @@ namespace SalesSystem.WebApi.Controllers
         /// </summary>
         /// <param name="idProduto"></param>
         [HttpPut("{idProduto:int}")]
-        public async Task<IActionResult> Put(int idProduto, ProdutoModel produto)
+        public async Task<IActionResult> Put(int idProduto, ProdutoDto produtoDto)
         {
             try
             {
                 var produtoDB = await _repository.GetProdutoPorId(idProduto);
                 if (produtoDB != null)
                 {
-                    _repository.Update(produto);
+                    var produtoModel = _mapper.Map<ProdutoModel>(produtoDto);
+                    _repository.Update(produtoModel);
                     if (await _repository.SaveChanges())
-                        return Ok(produto);
+                        return Ok(produtoDto);
                     else
                         return Conflict("Poduto não foi alterado, erro ao alterar no banco de dados.");
                 }
@@ -125,10 +134,10 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var produto = await _repository.GetProdutoPorId(idProduto);
-                if (produto != null)
+                var produtoModel = await _repository.GetProdutoPorId(idProduto);
+                if (produtoModel != null)
                 {
-                    _repository.Delete(produto);
+                    _repository.Delete(produtoModel);
                     if (await _repository.SaveChanges())
                         return Ok();
                     else

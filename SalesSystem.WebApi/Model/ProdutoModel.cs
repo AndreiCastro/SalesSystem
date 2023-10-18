@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 using System.ComponentModel;
-using System;
-using System.Numerics;
+using System.ComponentModel.DataAnnotations;
 
 namespace SalesSystem.WebApi.Model
 {
@@ -11,32 +9,28 @@ namespace SalesSystem.WebApi.Model
         [Key()]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "{0} é obrigatório.")]
-        [StringLength(40, MinimumLength = 3, ErrorMessage = "{0} deve conter de {2} a {1} caracteres.")]
+        [Required]
+        [StringLength(40)]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "Descrição é obrigatória.")]
-        [DisplayName("Descrição")]
-        [MinLength(3, ErrorMessage = "Descrição deve conter no mínino {1} caracteres.")]
+        [Required]
+        [MinLength(3)]
         public string Descricao { get; set; }
 
-        [Required(ErrorMessage = "Preço é obrigatório.")]
-        [DisplayName("Preço")]
+        [Required]
         public decimal Preco { get; set; }
 
-        [Required(ErrorMessage = "Unidade de Medida é obrigatória.")]
-        [StringLength(3, MinimumLength = 1, ErrorMessage = "Unidade de Medida deve conter de {2} a {1} caracteres.")]
-        [DisplayName("Unid. Medida")]
+        [Required]
+        [StringLength(3)]
         public string UnidadeMedida { get; set; }
 
-        [Required(ErrorMessage = "{0} é obrigatória.")]
+        [Required]
         public int Quantidade { get; set; }
 
-        [Required(ErrorMessage = "{0} é obrigatório.")]        
+        [Required]    
         public int Peso { get; set; }
 
-        [Required(ErrorMessage = "Data de Validade é obrigatória.")]
-        [DisplayName("Data de Validade")]
+        [Required]
         public DateTime DataValidade { get; set; }
     }
 }

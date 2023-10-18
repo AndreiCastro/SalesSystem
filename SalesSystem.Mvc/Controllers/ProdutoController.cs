@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SalesSystem.Mvc.Helpers;
-using SalesSystem.WebApi.Model;
+using SalesSystem.WebApi.Dtos;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -36,7 +36,7 @@ namespace SalesSystem.Mvc.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    var produtos = JsonConvert.DeserializeObject<List<ProdutoModel>>(data);
+                    var produtos = JsonConvert.DeserializeObject<List<ProdutoDto>>(data);
                     return View(produtos);
                 }
                 else
@@ -73,7 +73,7 @@ namespace SalesSystem.Mvc.Controllers
         /// </summary>
         /// <param name="produto"></param>
         [HttpPost]
-        public async Task<IActionResult> Create(ProdutoModel produto)
+        public async Task<IActionResult> Create(ProdutoDto produto)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace SalesSystem.Mvc.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    var produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
+                    var produto = JsonConvert.DeserializeObject<ProdutoDto>(data);
                     ViewBag.UnidadeMedida = produto.UnidadeMedida;
                     return View(produto);
                 }
@@ -140,7 +140,7 @@ namespace SalesSystem.Mvc.Controllers
         /// </summary>
         /// <param name="produto"></param>
         [HttpPost]
-        public async Task<IActionResult> Update(ProdutoModel produto)
+        public async Task<IActionResult> Update(ProdutoDto produto)
         {
             try
             {
@@ -187,7 +187,7 @@ namespace SalesSystem.Mvc.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    var produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
+                    var produto = JsonConvert.DeserializeObject<ProdutoDto>(data);
                     return View(produto);
                 }
                 else

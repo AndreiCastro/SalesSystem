@@ -29,15 +29,13 @@ namespace SalesSystem.WebApi.Model
         [Required]
         public DateTime DataVenda { get; set; }
         
-        [Required(ErrorMessage = "Quantidade do Produto é obrigatório.")]
-        [DisplayName("Quantidade de Produto")]
+        [Required]
         public int QuantidadeProduto { get; set; }
 
-        [Required(ErrorMessage = "Valor Total é obrigatório.")]
+        [Required]
         public decimal ValorTotal { get; set; }
                 
-        [DisplayName("Descrição")]
-        [StringLength(100, ErrorMessage = "Descrição não pode ultrapassar {1} caracteres.")]
+        [StringLength(100)]
         public string Descricao { get; set; }
 
         public decimal? Desconto { get; set; }

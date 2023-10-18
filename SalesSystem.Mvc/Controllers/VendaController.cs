@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SalesSystem.Mvc.Helpers;
-using SalesSystem.WebApi.Model;
+using SalesSystem.WebApi.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System;
 
 namespace SalesSystem.Mvc.Controllers
 {
@@ -36,7 +35,7 @@ namespace SalesSystem.Mvc.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    var vendas = JsonConvert.DeserializeObject<List<VendaModel>>(data);
+                    var vendas = JsonConvert.DeserializeObject<List<VendaDto>>(data);
                     return View(vendas);
                 }
                 else
@@ -63,13 +62,13 @@ namespace SalesSystem.Mvc.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    ViewBag.ListaClientes = JsonConvert.DeserializeObject<List<ClienteModel>>(data);
+                    ViewBag.ListaClientes = JsonConvert.DeserializeObject<List<ClienteDto>>(data);
                     response = await _httpClient.GetAsync("/api/produto");
 
                     if (response.IsSuccessStatusCode)
                     {
                         data = response.Content.ReadAsStringAsync().Result;
-                        ViewBag.ListaProdutos = JsonConvert.DeserializeObject<List<ProdutoModel>>(data);
+                        ViewBag.ListaProdutos = JsonConvert.DeserializeObject<List<ProdutoDto>>(data);
                     }
                     else
                     {
@@ -97,7 +96,7 @@ namespace SalesSystem.Mvc.Controllers
         /// </summary>
         /// <param name="venda"></param>
         [HttpPost]
-        public async Task<IActionResult> Create(VendaModel venda)
+        public async Task<IActionResult> Create(VendaDto venda)
         {
             try
             {
@@ -141,7 +140,7 @@ namespace SalesSystem.Mvc.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    var venda = JsonConvert.DeserializeObject<VendaModel>(data);
+                    var venda = JsonConvert.DeserializeObject<VendaDto>(data);
                     return View(venda);
                 }
                 else
@@ -165,20 +164,9 @@ namespace SalesSystem.Mvc.Controllers
         {            
             try
             {                
-                var venda = new VendaModel();
-                HttpResponseMessage response = await _httpClient.DeleteAsync("/api/venda/" + idVenda);
-                
+                HttpResponseMessage response = await _httpClient.DeleteAsync("/api/venda/" + idVenda);                
                 if (response.IsSuccessStatusCode)
                 {
-                    //response = await _httpClient.GetAsync("/api/produto/" + venda.IdProduto);
-                    //string data = response.Content.ReadAsStringAsync().Result;
-                    //var produto = JsonConvert.DeserializeObject<ProdutoModel>(data);
-                    
-                    //produto.Quantidade += venda.QuantidadeProduto;
-                    //var jsonProduto = JsonConvert.SerializeObject(produto);
-                    //StringContent content = new StringContent(jsonProduto, Encoding.UTF8, "application/json");
-                    //response = await _httpClient.PutAsync("/api/produto/" + produto.Id, content);
-
                     TempData["MensagemSucesso"] = "Venda excluída com sucesso!";
                     return RedirectToAction("Index");
                 }

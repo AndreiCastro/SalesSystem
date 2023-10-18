@@ -165,3 +165,9 @@ C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\ne
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\net5.0\SalesSystem.Mvc.pdb
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\net5.0\SalesSystem.Mvc.genruntimeconfig.cache
 C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\obj\Debug\net5.0\ref\SalesSystem.Mvc.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\Users\andrei\source\repos\MyProjects\SalesSystem\SalesSystem.Mvc\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll

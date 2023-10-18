@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SalesSystem.WebApi.Dtos;
 using SalesSystem.WebApi.Model;
 using SalesSystem.WebApi.Repository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SalesSystem.WebApi.Controllers
@@ -13,12 +16,14 @@ namespace SalesSystem.WebApi.Controllers
     {
         private readonly IVendaRepository _repository;
         private readonly IProdutoRepository _produtoRepository;
+        private readonly IMapper _mapper;
 
         #region Construtor
-        public VendaController(IVendaRepository repository, IProdutoRepository produtoRepository)
+        public VendaController(IVendaRepository repository, IProdutoRepository produtoRepository, IMapper mapper)
         {
             _repository = repository;
             _produtoRepository = produtoRepository;
+            _mapper = mapper;
         }
         #endregion Construtor
 
@@ -31,11 +36,12 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var vendas = await _repository.GetAllVendas();
-                if (vendas == null)
+                var vendasModel = await _repository.GetAllVendas();
+                var vendasDto = _mapper.Map<List<VendaDto>>(vendasModel);
+                if (vendasDto == null)
                     return Conflict("Vendas não encontrados");
                 else
-                    return Ok(vendas);
+                    return Ok(vendasDto);
             }
             catch (Exception ex)
             {
@@ -52,11 +58,12 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var venda = await _repository.GetVendaPorId(idVenda);
-                if (venda == null)
+                var vendaModel = await _repository.GetVendaPorId(idVenda);
+                var vendaDto = _mapper.Map<VendaDto>(vendaModel);
+                if (vendaDto == null)
                     return Conflict("Venda não encontrada.");
                 else
-                    return Ok(venda);
+                    return Ok(vendaDto);
             }
             catch (Exception ex)
             {
@@ -70,15 +77,16 @@ namespace SalesSystem.WebApi.Controllers
         /// Método para cadastrar uma venda
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> Post(VendaModel venda)
+        public async Task<IActionResult> Post(VendaDto vendaDto)
         {
             try
             {
-                var vendaModel = new VendaModel(_repository, _produtoRepository);
-                (bool valido, string textoErro) = await vendaModel.ValidaInclusaoVenda(venda);
+                var validaVenda = new VendaModel(_repository, _produtoRepository);
+                var vendaModel = _mapper.Map<VendaModel>(vendaDto);
+                (bool valido, string textoErro) = await validaVenda.ValidaInclusaoVenda(vendaModel);
 
                 if (valido)
-                    return Ok(venda);
+                    return Ok(vendaDto);
                 else
                     return Conflict(textoErro);
             }
@@ -99,8 +107,8 @@ namespace SalesSystem.WebApi.Controllers
         {
             try
             {
-                var vendaModel = new VendaModel(_repository, _produtoRepository);
-                (bool valido, string textoErro) = await vendaModel.ValidaExclusaoVenda(idVenda);
+                var validaVenda = new VendaModel(_repository, _produtoRepository);
+                (bool valido, string textoErro) = await validaVenda.ValidaExclusaoVenda(idVenda);
 
                 if (valido)
                         return Ok();

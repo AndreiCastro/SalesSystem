@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SalesSystem.Mvc.Helpers;
-using SalesSystem.WebApi.Model;
+using SalesSystem.WebApi.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -38,7 +38,7 @@ namespace SalesSystem.Mvc.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    var clientes = JsonConvert.DeserializeObject<List<ClienteModel>>(data);
+                    var clientes = JsonConvert.DeserializeObject<List<ClienteDto>>(data);
                     return View(clientes);
                 }
                 else
@@ -75,7 +75,7 @@ namespace SalesSystem.Mvc.Controllers
         /// </summary>
         /// <param name="cliente"></param>
         [HttpPost]
-        public async Task<IActionResult> Create(ClienteModel cliente)
+        public async Task<IActionResult> Create(ClienteDto cliente)
         {
             try
             {
@@ -120,7 +120,7 @@ namespace SalesSystem.Mvc.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    var cliente = JsonConvert.DeserializeObject<ClienteModel>(data);
+                    var cliente = JsonConvert.DeserializeObject<ClienteDto>(data);
                     ViewBag.UF = cliente.Uf;
                     return View(cliente);
                 }
@@ -142,7 +142,7 @@ namespace SalesSystem.Mvc.Controllers
         /// </summary>
         /// <param name="cliente"></param>
         [HttpPost]
-        public async Task<IActionResult> Update(ClienteModel cliente)
+        public async Task<IActionResult> Update(ClienteDto cliente)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace SalesSystem.Mvc.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    var cliente = JsonConvert.DeserializeObject<ClienteModel>(data);
+                    var cliente = JsonConvert.DeserializeObject<ClienteDto>(data);
                     return View(cliente);
                 }
                 else
